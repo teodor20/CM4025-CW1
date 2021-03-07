@@ -1,0 +1,44 @@
+{
+  "name": "cm4025",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "development": "nodemon",
+    "build": "webpack --config webpack.config.client.production.js && webpack --mode=production --config webpack.config.server.js",
+    "start": "NODE_ENV=production node ./dist/server.generated.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/teodor20/CM4025-CW1.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/teodor20/CM4025-CW1/issues"
+  },
+  "homepage": "https://github.com/teodor20/CM4025-CW1#readme",
+  "devDependencies": {
+    "@babel/core": "^7.13.1",
+    "@babel/preset-env": "^7.13.5",
+    "babel-loader": "^8.2.2"
+  },
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "compression": "^1.7.4",
+    "cookie-parser": "^1.4.5",
+    "cors": "^2.8.5",
+    "crypto": "^1.0.1",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "express-jwt": "^6.0.0",
+    "helmet": "^4.4.1",
+    "jsonwebtoken": "^8.5.1",
+    "lodash": "^4.17.21",
+    "mongoose": "^5.11.15",
+    "nodemon": "^2.0.7",
+    "webpack": "^5.24.2",
+    "webpack-cli": "^4.5.0",
+    "webpack-node-externals": "^2.5.2"
+  }
+}
