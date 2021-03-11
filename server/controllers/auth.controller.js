@@ -54,7 +54,7 @@ const requireSignin = expressJwt({
 })
 
 const hasAuthorization = (req, res, next) => {
-    const authorized = req.profile && req.auth && req.profile._id == req.auth._id
+    const authorized = req.profile && req.auth && req.profile._id == req.auth._id;
     if (!(authorized)) {
         return res.status('403').json({
             error: "User is not authorized"
@@ -63,9 +63,21 @@ const hasAuthorization = (req, res, next) => {
     next()
 }
 
+const hasAdminAuthorization = (req, res, next) => {
+    const authorized = req.profile && req.auth && req.profile._id == req.auth._id && req.profile.admin == true;
+    if (!(authorized)) {
+        return res.status('403').json({
+            error: "User is not authorized for admin"
+        })
+    }
+    next()
+}
+   
+
 export default {
     signin,
     signout,
     requireSignin,
-    hasAuthorization
+    hasAuthorization,
+    hasAdminAuthorization
 }
