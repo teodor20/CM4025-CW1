@@ -1,51 +1,19 @@
 import React from 'react'
-import { makeStyles } from '@material-ui/core/styles'
-import Card from '@material-ui/core/Card'
-import CardContent from '@material-ui/core/CardContent'
-import CardMedia from '@material-ui/core/CardMedia'
-import Typography from '@material-ui/core/Typography'
-import myImg from './../assets/images/myimage.jpg'
 
-const useStyles = makeStyles(theme => ({
-    card: {
-        maxWidth: 600,
-        margin: 'auto',
-        marginTop: theme.spacing(5),
-        marginBottom: theme.spacing(5)
-    },
-    title: {
-        padding: `${theme.spacing(3)}px ${theme.spacing(2.5)}px ${theme.spacing(2)}px`,
-        color: theme.palette.openTitle
-    },
-    media: {
-        minHeight: 400
-    },
-    credit: {
-        padding: 10,
-        textAlign: 'right',
-        backgroundColor: '#ededed',
-        borderBottom: '1px solid #d0d0d0',
-        '& a': {
-            color: '#3f4771'
-        }
-    }
-}))
+import Header from '../components/Header';
+import Games from '../components/Games';
+import Footer from '../components/Footer';
 
-export default function Home(){
-    const classes = useStyles()
+export default function Home() {
     return (
-    <Card className={classes.card}>
-    <Typography variant="h6" className={classes.title}>
-    Home Page
-    </Typography>
-    <CardMedia className={classes.media} image={myImg} title="My Image"/>
-    <Typography variant="body2" component="p" className={classes.credit} 
-        color="textSecondary">Photo: Cat</Typography>
-    <CardContent>
-    <Typography variant="body1" component="p">
-        Welcome to Lab 6 home page.
-    </Typography>
-    </CardContent> </Card>
-    )
-}
+        <React.Fragment>
+            <Header content={{
+                "header": "Game Mania",
+                "description": "Game mania is a free gaming website where you can play some of your favourite classic games!"
+            }} />
+            <Games />
+            <Footer content={{ "copy": "\u00a9 2021 Game Mania. All rights reserved." }} />
+        </React.Fragment>
+    );
+  }
    
