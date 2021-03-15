@@ -50,7 +50,7 @@ export default function Component(props) {
               </Grid>
               <Grid item xs={12} md={4}>
                 <Card>
-                <CardActionArea href="#">
+                <CardActionArea href="/tictactoe">
                     <CardMedia className={classes.media} image={ticTacToeImg} />
                     <CardHeader title="Tic-Tac-Toe" subheader="The player controls a dot, square, or object on a bordered plane. As it moves forward, it leaves a trail behind, resembling a moving snake." titleTypographyProps={{gutterBottom: true}} />
                   </CardActionArea>

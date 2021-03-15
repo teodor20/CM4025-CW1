@@ -9,7 +9,8 @@ import EditProfile from './user/EditProfile'
 import Profile from './user/Profile'
 import PrivateRoute from './auth/PrivateRoute'
 import Menu from './core/Menu'
-import Board from './components/snake/Board'
+import SnakeBoard from './components/snake/Board'
+import TicTacToeBoard from './components/tictactoe/Game'
 
 const MainRouter = () => {
     return (<div>
@@ -22,7 +23,8 @@ const MainRouter = () => {
            <PrivateRoute path="/user/edit/:userId" component={EditProfile}/>
            <Route path="/user/:userId" component={Profile}/>
            <Route path="/useradmin/:userId" component={UserAdmin}/>
-           <Route path="/snake" component={Board}/>
+           <Route path="/snake" component={SnakeBoard}/>
+           <Route path="/tictactoe" component={TicTacToeBoard}/>
         </Switch>
     </div>)
 }
