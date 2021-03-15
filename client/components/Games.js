@@ -42,9 +42,9 @@ export default function Component(props) {
             <Grid container spacing={4}>
               <Grid item xs={12} md={4}>
                 <Card>
-                  <CardActionArea href="#">
+                  <CardActionArea href="/snake">
                     <CardMedia className={classes.media} image={snakeImg} />
-                    <CardHeader title="Tic-Tac-Toe" subheader="The player controls a dot, square, or object on a bordered plane. As it moves forward, it leaves a trail behind, resembling a moving snake." titleTypographyProps={{gutterBottom: true}}/>
+                    <CardHeader title="Classic Snake" subheader="The player controls a dot, square, or object on a bordered plane. As it moves forward, it leaves a trail behind, resembling a moving snake." titleTypographyProps={{gutterBottom: true}}/>
                   </CardActionArea>
                 </Card>
               </Grid>
