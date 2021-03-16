@@ -14,23 +14,22 @@ const useStyles = makeStyles((theme) => ({
       marginRight: theme.spacing(0),
       marginBottom: theme.spacing(2),
     }
-  },
+  }
 }));
 
-export default function Header(props) {
+export default function Header() {
   const classes = useStyles();
 
   const content = {
-    'header': 'The New Internet',
-    'description': 'Decentralized, secure, private. The PiperNet is on it\'s way to revolutionize every smartphone, PC, and smart-fridge near you.',
+    'header': "Game Mania",
+    'description': "Game mania is a free gaming website where you can play some of your favourite classic games!",
     'primary-action': 'Sign up for free',
-    'secondary-action': 'Read more',
-    ...props.content
+    'secondary-action': 'Read more'
   };
 
   return (
     <section>
-      <Container maxWidth="md">
+      <Container style={classes} maxWidth="md">
         <Box py={8} textAlign="center">
           <Typography variant="h3" component="h2" gutterBottom={true}>{content['header']}</Typography>
           <Typography variant="h5" color="textSecondary" paragraph={true}>{content['description']}</Typography>

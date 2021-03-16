@@ -30,12 +30,11 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function Footer(props) {
+export default function Footer() {
   const classes = useStyles();
 
   const content = {
-    'copy': '© 2020 Pied Piper. All rights reserved.',
-    ...props.content
+    'copy': '© 2021 Game Mania. All rights reserved..'
   };
 
   return (

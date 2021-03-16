@@ -52,7 +52,7 @@ export default function Component() {
                 <Card>
                 <CardActionArea href="/tictactoe">
                     <CardMedia className={classes.media} image={ticTacToeImg} />
-                    <CardHeader title="Tic-Tac-Toe" subheader="The player controls a dot, square, or object on a bordered plane. As it moves forward, it leaves a trail behind, resembling a moving snake." titleTypographyProps={{gutterBottom: true}} />
+                    <CardHeader title="Tic-Tac-Toe" subheader="Game in which two players alternately put Xs and Os in compartments of a figure formed by two vertical lines crossing two horizontal lines." titleTypographyProps={{gutterBottom: true}} />
                   </CardActionArea>
                 </Card>
               </Grid>
@@ -60,7 +60,7 @@ export default function Component() {
                 <Card>
                   <CardActionArea href="/puzzle">
                     <CardMedia className={classes.media} image={puzzleImg} />
-                    <CardHeader title="Tic-Tac-Toe" subheader="The player controls a dot, square, or object on a bordered plane. As it moves forward, it leaves a trail behind, resembling a moving snake." titleTypographyProps={{gutterBottom: true}} />
+                    <CardHeader title="2048" subheader="2048 is often played on a plain 4×4 grid, with numbered tiles that slide when a player moves them using the four arrow keys." titleTypographyProps={{gutterBottom: true}} />
                   </CardActionArea>
                 </Card>
               </Grid>
