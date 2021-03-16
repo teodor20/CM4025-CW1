@@ -2,7 +2,6 @@ import React from 'react';
 
 const style = {
     background: 'gray',
-    /* font-weight: 800; */
     cursor: 'pointer',
     fontSize: "35px"
 }
