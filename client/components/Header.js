@@ -4,6 +4,7 @@ import Container from '@material-ui/core/Container';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
+import auth from '../auth/auth-helper'
 
 const useStyles = makeStyles((theme) => ({
   primaryAction: {
@@ -34,7 +35,11 @@ export default function Header(props) {
           <Typography variant="h3" component="h2" gutterBottom={true}>{content['header']}</Typography>
           <Typography variant="h5" color="textSecondary" paragraph={true}>{content['description']}</Typography>
           <Box mt={4}>
-            <Button variant="contained" color="primary" className={classes.primaryAction}>{content['primary-action']}</Button>
+          {
+            !auth.isAuthenticated() && (<span>
+              <Button href='/signup' variant="contained" color="primary" className={classes.primaryAction}>{content['primary-action']}</Button>
+            </span>)
+          }
             <Button color="secondary">{content['secondary-action']}</Button>
           </Box>
         </Box>

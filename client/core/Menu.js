@@ -6,8 +6,6 @@ import Box from '@material-ui/core/Box'
 import auth from '../auth/auth-helper'
 import {Link, withRouter} from 'react-router-dom'
 import logo from './../assets/images/logo.png'
-import { makeStyles } from '@material-ui/core/styles';
-import theme from '../theme'
 
 const isActive = (history, path) => {
   if (history.location.pathname == path)
@@ -15,30 +13,6 @@ const isActive = (history, path) => {
   else
     return {color: '#ffffff'}
 }
-
-// const useStyles = makeStyles((theme) => ({
-//   menuButton: {
-//     marginRight: theme.spacing(2),
-//   },
-//   linkBrand: {
-//     flexGrow: 1,
-//     [theme.breakpoints.down('xs')]: {
-//       display: 'none',
-//     }
-//   },
-//   linkBrandSmall: {
-//     display: 'none',
-//     flexGrow: 1,
-//     [theme.breakpoints.down('xs')]: {
-//       display: 'inline-block',
-//     }
-//   },
-//   secondaryButton: {
-//     marginRight: theme.spacing(2),
-//   }
-// }));
-
-//const classes = useStyles();
 
 const content = {
   'brand': { image: logo, width: 275 }
@@ -60,7 +34,7 @@ const Menu = withRouter(({history}) => (
             <Button color="inherit" style={{float:'left', ...isActive(history, "/signin")}} >Sign In </Button>
           </Link>
           <Link to="/signup">
-            <Button variant="contained" color="secondary" style={{float:'left', ...isActive(history, "/signup")}}>Sign Up</Button>
+            <Button variant="contained" color="secondary" style={{float:'left', color: '#ffffff'}}>Sign Up</Button>
           </Link>
         </span>)
       }

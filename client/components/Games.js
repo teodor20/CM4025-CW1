@@ -1,9 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { emphasize, fade, darken, lighten } from '@material-ui/core/styles/colorManipulator';
 
-import clsx from 'clsx';
-
+import auth from '../auth/auth-helper'
 import Box from '@material-ui/core/Box';
 import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
@@ -18,14 +16,14 @@ import ticTacToeImg from './../assets/images/tic-tac-toe.png'
 
 
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   media: {
     height: '256px'
   },
 }
 ));
 
-export default function Component(props) {
+export default function Component() {
   const classes = useStyles();
 
   return (
