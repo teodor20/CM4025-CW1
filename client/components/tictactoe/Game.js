@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import Board from './Board'
 
 const style = {
@@ -36,7 +36,8 @@ const calculateWinner = (squares) => {
     return null;
 }
 
-const Game = () => {
+export default function Game({}) {
+
     const [history, setHistory] = useState([Array(9).fill(null)])
     const [stepNumber, setStepNumber] = useState(0);
     const [xIsNext, setXisnext] = useState(true);
@@ -86,5 +87,3 @@ const Game = () => {
         </div>
     )
 }
-
-export default Game;

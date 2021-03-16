@@ -11,6 +11,7 @@ import PrivateRoute from './auth/PrivateRoute'
 import Menu from './core/Menu'
 import SnakeBoard from './components/snake/Board'
 import TicTacToeBoard from './components/tictactoe/Game'
+import PuzzleBoard from './components/puzzle/Game'
 
 const MainRouter = () => {
     return (<div>
@@ -25,6 +26,7 @@ const MainRouter = () => {
            <Route path="/useradmin/:userId" component={UserAdmin}/>
            <Route path="/snake" component={SnakeBoard}/>
            <Route path="/tictactoe" component={TicTacToeBoard}/>
+           <Route path="/puzzle" component={PuzzleBoard}/>
         </Switch>
     </div>)
 }

@@ -13,12 +13,14 @@ import CardHeader from '@material-ui/core/CardHeader';
 
 import snakeImg from './../assets/images/snake-game.jpg'
 import ticTacToeImg from './../assets/images/tic-tac-toe.png'
+import puzzleImg from './../assets/images/2048.png'
 
 
 
 const useStyles = makeStyles(() => ({
   media: {
-    height: '256px'
+    height: '256px',
+    border: '2px solid black'
   },
 }
 ));
@@ -56,8 +58,8 @@ export default function Component() {
               </Grid>
               <Grid item xs={12} md={4}>
                 <Card>
-                  <CardActionArea href="#">
-                    <CardMedia className={classes.media} image={snakeImg} />
+                  <CardActionArea href="/puzzle">
+                    <CardMedia className={classes.media} image={puzzleImg} />
                     <CardHeader title="Tic-Tac-Toe" subheader="The player controls a dot, square, or object on a bordered plane. As it moves forward, it leaves a trail behind, resembling a moving snake." titleTypographyProps={{gutterBottom: true}} />
                   </CardActionArea>
                 </Card>
