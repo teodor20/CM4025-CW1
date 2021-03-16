@@ -1,5 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import Board from './Board'
+import {Redirect, Link} from 'react-router-dom'
+import auth from '../../auth/auth-helper'
 
 const style = {
     fontFamily: '"Roboto", sans-serif',
@@ -38,11 +40,28 @@ const calculateWinner = (squares) => {
 
 export default function Game({}) {
 
+    const [redirectToSignin, setRedirectToSignin] = useState(false)
+    const jwt = auth.isAuthenticated();
+
     const [history, setHistory] = useState([Array(9).fill(null)])
     const [stepNumber, setStepNumber] = useState(0);
     const [xIsNext, setXisnext] = useState(true);
     const winner = calculateWinner(history[stepNumber]);
     const xO = xIsNext ? "X" : "O";
+
+    useEffect(() => {
+        const abortController = new AbortController();
+        if (!jwt) {
+            setRedirectToSignin(true);
+            return function cleanup(){
+                abortController.abort()
+            }
+        }
+    }, []);
+    
+    if (redirectToSignin) {
+        return <Redirect to='/signin'/>
+    }
 
     const handleClick = (i) => {
         const historyPoint = history.slice(0, stepNumber + 1);

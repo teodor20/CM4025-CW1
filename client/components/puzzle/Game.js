@@ -2,14 +2,51 @@ import React, { useState, useEffect } from "react";
 import cloneDeep from 'lodash.clonedeep'
 import { useEvent, getColors } from "./Util";
 import Swipe from "react-easy-swipe";
+import {Redirect, Link} from 'react-router-dom'
+import auth from '../../auth/auth-helper'
+import Block from './Block'
 
+const style = {
+  newGameButton: {
+    padding: 10,
+    background: "#846F5B",
+    color: "#F8F5F0",
+    width: 95,
+    borderRadius: 7,
+    fontWeight: "900",
+    marginLeft: "auto",
+    marginBottom: "auto",
+    cursor: "pointer",
+  },
+  tryAgainButton: {
+    padding: 10,
+    background: "#846F5B",
+    color: "#F8F5F0",
+    width: 80,
+    borderRadius: 7,
+    fontWeight: "900",
+    cursor: "pointer",
+    margin: "auto",
+    marginTop: 20,
+  },
+  gameOverOverlay: {
+    position: "absolute",
+    height: "100%",
+    width: "100%",
+    left: 0,
+    top: 0,
+    borderRadius: 5,
+    background: "rgba(238,228,218,.5)",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+  }
+}
 
 export default function Game({}) {
-    const UP_ARROW = 38;
-    const DOWN_ARROW = 40;
-    const LEFT_ARROW = 37;
-    const RIGHT_ARROW = 39;
-  
+    const [redirectToSignin, setRedirectToSignin] = useState(false)
+    const jwt = auth.isAuthenticated();
+
     const [data, setData] = useState([
       [0, 0, 0, 0],
       [0, 0, 0, 0],
@@ -18,6 +55,11 @@ export default function Game({}) {
     ]);
   
     const [gameOver, setGameOver] = useState(false);
+
+    const UP_ARROW = 38;
+    const DOWN_ARROW = 40;
+    const LEFT_ARROW = 37;
+    const RIGHT_ARROW = 39;
   
     // Initialize the grid
     const initialize = () => {
@@ -307,14 +349,28 @@ export default function Game({}) {
     }, []);
   
     useEvent("keydown", handleKeyDown);
+
+    useEffect(() => {
+      const abortController = new AbortController();
+      if (!jwt) {
+          setRedirectToSignin(true);
+          return function cleanup(){
+              abortController.abort()
+          }
+      }
+    }, []);
   
+    if (redirectToSignin) {
+        return <Redirect to='/signin'/>
+    }
+
     return (
-      <div className="App">
+      <div>
         <div
           style={{
             width: 345,
             margin: "auto",
-            marginTop: 30,
+            marginTop: 30
           }}
         >
           <div style={{ display: "flex" }}>
@@ -402,8 +458,8 @@ export default function Game({}) {
           </div>
   
           <div style={{ width: "inherit" }}>
-            <p class="game-explanation">
-              <strong class="important">How to play:</strong> Use your{" "}
+            <p>
+              <strong className="important">How to play:</strong> Use your{" "}
               <strong>arrow keys</strong> to move the tiles. When two tiles with
               the same number touch, they <strong>merge into one!</strong>
             </p>

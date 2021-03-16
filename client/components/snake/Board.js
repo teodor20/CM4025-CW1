@@ -1,6 +1,8 @@
-import React, { Component } from 'react'
+import React, { useState, useEffect, Component } from "react";
 import Snake from './Snake'
 import Food from './Food'
+import {Redirect, Link} from 'react-router-dom'
+import auth from '../../auth/auth-helper'
 
 const getRandomCoordinates = () => {
     let min = 1;
@@ -177,4 +179,25 @@ class Board extends Component {
 
 }
 
-export default Board
+const funcBoard = () => {
+    const [redirectToSignin, setRedirectToSignin] = useState(false)
+    const jwt = auth.isAuthenticated();
+
+    useEffect(() => {
+        const abortController = new AbortController();
+        if (!jwt) {
+            setRedirectToSignin(true);
+            return function cleanup(){
+                abortController.abort()
+            }
+        }
+      }, []);
+    
+    if (redirectToSignin) {
+        return <Redirect to='/signin'/>
+    }
+  
+    return <Board/>
+  }
+
+export default funcBoard
