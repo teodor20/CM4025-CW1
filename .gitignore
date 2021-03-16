@@ -105,3 +105,6 @@ dist
 
 # Script
 config/run.bat
+
+# Debug config
+.vscode/launch.json

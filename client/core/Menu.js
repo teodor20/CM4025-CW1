@@ -29,6 +29,13 @@ const Menu = withRouter(({history}) => (
         </Link>
       </Box>
       {
+        auth.isAdminAuthenticated() && (<span>
+          <Link to={"/dashboardadmin/" + auth.isAuthenticated().user._id}>
+            <Button variant="contained" color="secondary" style={{float:'left', color: '#ffffff'}}>Admin Dashboard</Button>
+          </Link>
+        </span>)
+      }
+      {
         !auth.isAuthenticated() && (<span>
           <Link to="/signin">
             <Button color="inherit" style={{float:'left', ...isActive(history, "/signin")}} >Sign In </Button>

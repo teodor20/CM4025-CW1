@@ -24,14 +24,29 @@ const signin = async (req, res) => {
         res.cookie("t", token, {
             expire: new Date() + 9999
         })
-        return res.json({
-            token,
-            user: {
-                _id: user._id,
-                name: user.name,
-                email: user.email
-            }
-        })
+
+        //A bit more code than needed, but we would rather not even return the admin field if the user is not admin
+        if (user.admin) {
+            return res.json({
+                token,
+                user: {
+                    _id: user._id,
+                    name: user.name,
+                    email: user.email,
+                    admin: user.admin
+                }
+            })
+        }
+        else {
+            return res.json({
+                token,
+                user: {
+                    _id: user._id,
+                    name: user.name,
+                    email: user.email
+                }
+            })
+        }
     } catch (err) {
         return res.status('401').json({
             error: "Could not sign in"

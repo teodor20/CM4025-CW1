@@ -26,7 +26,7 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-export default function Users({ match }) { 
+export default function DashboardAdmin({ match }) { 
   const classes = useStyles()
   const [users, setUsers] = useState([])
   const jwt = auth.isAuthenticated()

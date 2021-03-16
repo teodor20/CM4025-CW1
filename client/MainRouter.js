@@ -2,7 +2,7 @@ import React from 'react'
 import {Route, Switch} from 'react-router-dom'
 import Home from './core/Home'
 import Users from './components/user/Users'
-import UserAdmin from './components/user/UsersAdmin'
+import UserAdmin from './components/user/DashboardAdmin'
 import Signup from './components/user/Signup'
 import Signin from './auth/Signin'
 import EditProfile from './components/user/EditProfile'
@@ -12,6 +12,7 @@ import Menu from './core/Menu'
 import SnakeBoard from './components/snake/Board'
 import TicTacToeBoard from './components/tictactoe/Game'
 import PuzzleBoard from './components/puzzle/Game'
+import DashboardAdmin from './components/user/DashboardAdmin'
 
 const MainRouter = () => {
     return (<div>
@@ -23,7 +24,7 @@ const MainRouter = () => {
            <Route path="/signin" component={Signin}/>
            <PrivateRoute path="/user/edit/:userId" component={EditProfile}/>
            <Route path="/user/:userId" component={Profile}/>
-           <Route path="/useradmin/:userId" component={UserAdmin}/>
+           <PrivateRoute path="/dashboardadmin/:userId" component={DashboardAdmin}/>
            <Route path="/snake" component={SnakeBoard}/>
            <Route path="/tictactoe" component={TicTacToeBoard}/>
            <Route path="/puzzle" component={PuzzleBoard}/>
