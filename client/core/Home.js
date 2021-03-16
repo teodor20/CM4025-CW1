@@ -1,8 +1,8 @@
 import React from 'react'
 
-import Header from '../components/Header';
-import Games from '../components/Games';
-import Footer from '../components/Footer';
+import Header from '../components/landing/Header';
+import Games from '../components/landing/Games';
+import Footer from '../components/landing/Footer';
 
 export default function Home() {
     return (

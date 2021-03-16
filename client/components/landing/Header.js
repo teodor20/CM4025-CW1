@@ -4,7 +4,7 @@ import Container from '@material-ui/core/Container';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
-import auth from '../auth/auth-helper'
+import auth from '../../auth/auth-helper'
 
 const useStyles = makeStyles((theme) => ({
   primaryAction: {

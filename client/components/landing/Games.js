@@ -1,7 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 
-import auth from '../auth/auth-helper'
+import auth from '../../auth/auth-helper'
 import Box from '@material-ui/core/Box';
 import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
@@ -11,9 +11,9 @@ import CardActionArea from '@material-ui/core/CardActionArea';
 import CardMedia from '@material-ui/core/CardMedia';
 import CardHeader from '@material-ui/core/CardHeader';
 
-import snakeImg from './../assets/images/snake-game.jpg'
-import ticTacToeImg from './../assets/images/tic-tac-toe.png'
-import puzzleImg from './../assets/images/2048.png'
+import snakeImg from '../../assets/images/snake-game.jpg'
+import ticTacToeImg from '../../assets/images/tic-tac-toe.png'
+import puzzleImg from '../../assets/images/2048.png'
 
 
 

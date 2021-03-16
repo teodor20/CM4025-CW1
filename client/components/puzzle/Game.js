@@ -25,9 +25,7 @@ export default function Game({}) {
       let newGrid = cloneDeep(data);
   
       addNumber(newGrid);
-      console.table(newGrid);
       addNumber(newGrid);
-      console.table(newGrid);
       setData(newGrid);
     };
   
@@ -243,8 +241,6 @@ export default function Game({}) {
       }
   
       let checker2 = swipeDown(true);
-      console.table(data);
-      console.table(checker2);
       if (JSON.stringify(data) !== JSON.stringify(checker2)) {
         return false;
       }
