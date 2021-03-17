@@ -7,7 +7,7 @@ import TextField from '@material-ui/core/TextField'
 import Typography from '@material-ui/core/Typography'
 import Icon from '@material-ui/core/Icon'
 import { makeStyles } from '@material-ui/core/styles'
-import {create} from './api-user.js'
+import {createUser} from '../api/api-user.js'
 import Dialog from '@material-ui/core/Dialog'
 import DialogActions from '@material-ui/core/DialogActions'
 import DialogContent from '@material-ui/core/DialogContent'
@@ -61,7 +61,7 @@ export default function Signup() {
       email: values.email || undefined,
       password: values.password || undefined
     }
-    create(user).then((data) => {
+    createUser(user).then((data) => {
       if (data.error) {
         setValues({ ...values, error: data.error})
       } else {

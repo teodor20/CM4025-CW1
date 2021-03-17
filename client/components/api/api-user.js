@@ -1,4 +1,4 @@
-const create = async (user) => {
+const createUser = async (user) => {
   try {
       let response = await fetch('/api/users/', {
         method: 'POST',
@@ -94,7 +94,7 @@ const remove = async (params, credentials) => {
 }
 
 export {
-  create,
+  createUser,
   list,
   listadmin,
   read,

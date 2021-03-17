@@ -41,18 +41,18 @@ export default function Footer() {
     <footer className={classes.root}>
       <Container maxWidth="lg">
         <Box py={6} display="flex" flexWrap="wrap" alignItems="center">
-          <Typography color="textSecondary" component="p" gutterBottom={false} className={classes.copy}>{content['copy']}</Typography>
+          <Typography color="secondary" component="p" gutterBottom={false} className={classes.copy}>{content['copy']}</Typography>
           <Box ml="auto" className={classes.iconsBoxRoot}>
-            <IconButton color="textSecondary" aria-label="Twitter">
+            <IconButton color="secondary" aria-label="Twitter">
               <TwitterIcon />
             </IconButton>
-            <IconButton color="textSecondary" aria-label="Facebook">
+            <IconButton color="secondary" aria-label="Facebook">
               <FacebookIcon />
             </IconButton>
-            <IconButton color="textSecondary" aria-label="Instagram">
+            <IconButton color="secondary" aria-label="Instagram">
               <InstagramIcon />
             </IconButton>
-            <IconButton color="textSecondary" aria-label="LinkedIn">
+            <IconButton color="secondary" aria-label="LinkedIn">
               <LinkedInIcon />
             </IconButton>
           </Box>

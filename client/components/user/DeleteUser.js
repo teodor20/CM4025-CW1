@@ -9,7 +9,7 @@ import DialogContent from '@material-ui/core/DialogContent'
 import DialogContentText from '@material-ui/core/DialogContentText'
 import DialogTitle from '@material-ui/core/DialogTitle'
 import auth from '../../auth/auth-helper'
-import {remove} from './api-user.js'
+import {remove} from '../api/api-user.js'
 import {Redirect} from 'react-router-dom'
 
 export default function DeleteUser(props) {

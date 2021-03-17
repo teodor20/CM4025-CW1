@@ -8,7 +8,7 @@ import Typography from '@material-ui/core/Typography'
 import Icon from '@material-ui/core/Icon'
 import { makeStyles } from '@material-ui/core/styles'
 import auth from '../../auth/auth-helper'
-import {read, update} from './api-user.js'
+import {read, update} from '../api/api-user.js'
 import {Redirect} from 'react-router-dom'
 
 const useStyles = makeStyles(theme => ({
