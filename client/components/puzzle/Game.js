@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import cloneDeep from 'lodash.clonedeep'
 import { useEvent, getColors } from "./Util";
 import Swipe from "react-easy-swipe";
 import {Redirect, Link} from 'react-router-dom'
 import auth from '../../auth/auth-helper'
 import Block from './Block'
+import {createGame} from '../api/api-game'
 
 const style = {
   newGameButton: {
@@ -43,7 +44,7 @@ const style = {
   }
 }
 
-export default function Game({}) {
+export default function Game() {
     const [redirectToSignin, setRedirectToSignin] = useState(false)
     const jwt = auth.isAuthenticated();
 
@@ -60,7 +61,31 @@ export default function Game({}) {
     const DOWN_ARROW = 40;
     const LEFT_ARROW = 37;
     const RIGHT_ARROW = 39;
+    const timer = useRef(0);
+    let intervalId = 0;
   
+    //Record game start
+    const recordGame = () => {
+
+      clearInterval(intervalId);
+      
+      const game = {
+        type: '2048',
+        user: jwt.user._id,
+        duration: timer.current
+      }
+
+      createGame( {userId: jwt.user._id},
+                  {t: jwt.token},
+                  game ).then((data) => {
+                    if (data && data.error) {
+                      console.log(data.error)
+                    }
+                  })
+
+      clearInterval(intervalId);
+    }
+
     // Initialize the grid
     const initialize = () => {
   
@@ -314,6 +339,9 @@ export default function Game({}) {
       addNumber(emptyGrid);
       addNumber(emptyGrid);
       setData(emptyGrid);
+      recordGame();
+      timer.current=0;
+
     };
   
     const handleKeyDown = (event) => {
@@ -343,11 +371,6 @@ export default function Game({}) {
       }
     };
   
-    useEffect(() => {
-      initialize();
-      // eslint-disable-next-line
-    }, []);
-  
     useEvent("keydown", handleKeyDown);
 
     useEffect(() => {
@@ -357,6 +380,24 @@ export default function Game({}) {
           return function cleanup(){
               abortController.abort()
           }
+      }
+      //Create a Game in the db if tab/browser is closed
+      window.addEventListener("beforeunload", recordGame);
+
+      //Start timer
+      intervalId = setInterval(() => {
+        timer.current++;
+      }, 1000);
+
+      //Initialise the game
+      initialize();
+      // eslint-disable-next-line
+
+      return () => {
+        //Create a Game in the db if component is closed        
+        recordGame();
+        clearInterval(intervalId);
+        window.removeEventListener("beforeunload", recordGame);
       }
     }, []);
   
