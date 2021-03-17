@@ -68,7 +68,7 @@ export default function Game() {
     const recordGame = () => {
 
       clearInterval(intervalId);
-      
+
       const game = {
         type: '2048',
         user: jwt.user._id,
@@ -381,6 +381,7 @@ export default function Game() {
               abortController.abort()
           }
       }
+      
       //Create a Game in the db if tab/browser is closed
       window.addEventListener("beforeunload", recordGame);
 

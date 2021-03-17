@@ -1,7 +1,8 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useRef} from 'react'
 import Board from './Board'
 import {Redirect, Link} from 'react-router-dom'
 import auth from '../../auth/auth-helper'
+import {createGame} from '../api/api-game'
 
 const style = {
     fontFamily: '"Roboto", sans-serif',
@@ -42,6 +43,8 @@ export default function Game({}) {
 
     const [redirectToSignin, setRedirectToSignin] = useState(false)
     const jwt = auth.isAuthenticated();
+    const timer = useRef(0);
+    let intervalId = 0;
 
     const [history, setHistory] = useState([Array(9).fill(null)])
     const [stepNumber, setStepNumber] = useState(0);
@@ -57,10 +60,47 @@ export default function Game({}) {
                 abortController.abort()
             }
         }
+
+        //Create a Game in the db if tab/browser is closed
+        window.addEventListener("beforeunload", recordGame);
+
+        //Start timer
+        intervalId = setInterval(() => {
+            timer.current++;
+        }, 1000);
+
+        return () => {
+            recordGame();
+            clearInterval(intervalId);
+            window.removeEventListener("beforeunload", recordGame);
+        }
+
     }, []);
     
     if (redirectToSignin) {
         return <Redirect to='/signin'/>
+    }
+
+    //Record game start
+    const recordGame = () => {
+
+        clearInterval(intervalId);
+        
+        const game = {
+          type: 'TTT',
+          user: jwt.user._id,
+          duration: timer.current
+        }
+
+        createGame( {userId: jwt.user._id},
+                    {t: jwt.token},
+                    game ).then((data) => {
+                      if (data && data.error) {
+                        console.log(data.error)
+                      }
+                    })
+
+        clearInterval(intervalId);
     }
 
     const handleClick = (i) => {
