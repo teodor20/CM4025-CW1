@@ -1,4 +1,5 @@
 import Game from '../models/game.model'
+import errorHandler from './../helpers/dbErrorHandler'
 
 //Create new game
 const create = async (req, res) => {
