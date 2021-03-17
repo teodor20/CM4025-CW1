@@ -6,6 +6,7 @@ import compress from 'compression'
 import cors from 'cors'
 import helmet from 'helmet'
 import userRoutes from './routes/user.routes'
+import gameRoutes from './routes/game.routes'
 import authRoutes from './routes/auth.routes'
 // modules for server side rendering
 import React from 'react'
@@ -45,6 +46,9 @@ app.use(cors())
 // user our routes
 app.use('/', userRoutes)
 
+// user our game routes
+app.use('/', gameRoutes)
+
 // use auth routes
 app.use('/', authRoutes)
 
@@ -62,7 +66,6 @@ app.use((err, req, res, next) => {
     }
 })
 
-//TODO: Change Template to something else
 app.get('*', (req, res) => {
     const sheets = new ServerStyleSheets()
     const context = {}

@@ -39,8 +39,6 @@ export default function DashboardAdmin({ match }) {
       if (data && data.error) {
         console.log(data.error)
       } else {
-      	console.log("Here is the user data")
-      	console.log(data)
         setUsers(data)
       }
     })

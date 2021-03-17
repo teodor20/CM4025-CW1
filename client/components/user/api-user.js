@@ -27,7 +27,6 @@ const list = async (signal) => {
 }
 
 const listadmin = async (params, credentials, signal) => {
-  console.log("listing the users for admin")
   try {
     let response = await fetch('/api/users/admin/' + params.userId, {
       method: 'GET',
