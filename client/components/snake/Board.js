@@ -1,8 +1,9 @@
-import React, { useState, useEffect, Component } from "react";
+import React, { useState, useEffect, Component, useRef } from "react";
 import Snake from './Snake'
 import Food from './Food'
 import {Redirect, Link} from 'react-router-dom'
 import auth from '../../auth/auth-helper'
+import {createGame} from '../api/api-game'
 
 const getRandomCoordinates = () => {
     let min = 1;
@@ -182,6 +183,29 @@ class Board extends Component {
 const funcBoard = () => {
     const [redirectToSignin, setRedirectToSignin] = useState(false)
     const jwt = auth.isAuthenticated();
+    const timer = useRef(0);
+    let intervalId = 0;
+
+    const recordGame = () => {
+
+        clearInterval(intervalId);
+        
+        const game = {
+          type: 'CS',
+          user: jwt.user._id,
+          duration: timer.current
+        }
+
+        createGame( {userId: jwt.user._id},
+                    {t: jwt.token},
+                    game ).then((data) => {
+                      if (data && data.error) {
+                        console.log(data.error)
+                      }
+                    })
+
+        clearInterval(intervalId);
+    }
 
     useEffect(() => {
         const abortController = new AbortController();
@@ -191,7 +215,22 @@ const funcBoard = () => {
                 abortController.abort()
             }
         }
+
+        //Create a Game in the db if tab/browser is closed
+        window.addEventListener("beforeunload", recordGame);
+
+        //Start timer
+        intervalId = setInterval(() => {
+            timer.current++;
+        }, 1000);
+
+        return () => {
+            recordGame();
+            clearInterval(intervalId);
+            window.removeEventListener("beforeunload", recordGame);
+        }
       }, []);
+      
     
     if (redirectToSignin) {
         return <Redirect to='/signin'/>

@@ -39,7 +39,7 @@ const calculateWinner = (squares) => {
     return null;
 }
 
-export default function Game({}) {
+export default function Game() {
 
     const [redirectToSignin, setRedirectToSignin] = useState(false)
     const jwt = auth.isAuthenticated();
