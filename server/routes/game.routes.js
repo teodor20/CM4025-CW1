@@ -7,6 +7,7 @@ const router = express.Router()
 
 router.route('/api/games/:userId')
     .post(authCtrl.requireSignin, authCtrl.hasAuthorization, gameCtrl.create)
+    .get(authCtrl.requireSignin, authCtrl.hasAuthorization, gameCtrl.userList)
 
 router.route('/api/games/admin/:userId')
     .delete(authCtrl.requireSignin, authCtrl.hasAdminAuthorization, gameCtrl.remove)

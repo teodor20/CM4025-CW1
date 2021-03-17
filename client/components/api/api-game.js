@@ -38,7 +38,7 @@ const listGame = async (params, credentials, signal) => {
 
 const removeGame = async (params, credentials, gameId) => {
     try {
-      let response = await fetch('/api/users/' + params.userId, {
+      let response = await fetch('/api/games/' + params.userId, {
         method: 'DELETE',
         headers: {
           'Accept': 'application/json',
@@ -55,8 +55,29 @@ const removeGame = async (params, credentials, gameId) => {
     }
   }
 
+const getUserGames = async (params, credentials) => {
+  try {
+      let response = await fetch('/api/games/' + params.userId, {
+        method: 'GET',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + credentials.t
+        }
+      })
+    return await response.json()
+  } catch(err) {
+    console.log(err)
+  }
+}
+
 export {
     createGame,
     listGame,
-    removeGame
+    removeGame,
+    getUserGames
 }

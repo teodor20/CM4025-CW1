@@ -28,6 +28,18 @@ const list = async (req, res) => {
     }
 }
 
+//List all games for user
+const userList = async (req, res) => {
+    try {
+        let games = await Game.find({user: req.profile.id})
+        res.json(games)
+    } catch (err) {
+        return res.status(400).json({
+            error: errorHandler.getErrorMessage(err)
+        })
+    }
+}
+
 //Find game
 const gameByID = async (req, res, next, id) => {
     try {
@@ -62,5 +74,6 @@ export default {
     create,
     list,
     gameByID,
+    userList,
     remove
 }
