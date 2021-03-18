@@ -11,9 +11,9 @@ router.route('/api/games/:userId')
 
 router.route('/api/games/admin/:userId')
     .delete(authCtrl.requireSignin, authCtrl.hasAdminAuthorization, gameCtrl.remove)
-
-router.route('/api/games/admin/:userId')
     .get(authCtrl.requireSignin, authCtrl.hasAdminAuthorization, gameCtrl.list)
+    .patch(authCtrl.requireSignin, authCtrl.hasAdminAuthorization, gameCtrl.clearDuration)
+
     
 
 router.param('userId', userCtrl.userByID)
