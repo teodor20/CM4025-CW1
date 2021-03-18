@@ -39,7 +39,7 @@ export default function Header() {
               <Button href='/signup' variant="contained" color="primary" className={classes.primaryAction}>{content['primary-action']}</Button>
             </span>)
           }
-            <Button color="secondary">{content['secondary-action']}</Button>
+            <Button href='/about' color="secondary">{content['secondary-action']}</Button>
           </Box>
         </Box>
       </Container>

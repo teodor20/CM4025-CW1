@@ -11,6 +11,7 @@ import SnakeBoard from './components/snake/Board'
 import TicTacToeBoard from './components/tictactoe/Game'
 import PuzzleBoard from './components/puzzle/Game'
 import DashboardAdmin from './components/user/DashboardAdmin'
+import About from './components/About'
 import NotFound from './components/NotFound'
 
 const MainRouter = () => {
@@ -26,6 +27,7 @@ const MainRouter = () => {
            <Route path="/snake" component={SnakeBoard}/>
            <Route path="/tictactoe" component={TicTacToeBoard}/>
            <Route path="/puzzle" component={PuzzleBoard}/>
+           <Route path="/about" component={About}/>
            <Route component={NotFound}/>
         </Switch>
     </div>)
