@@ -10,7 +10,7 @@ import CardHeader from '@material-ui/core/CardHeader';
 import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
 import DeleteIcon from '@material-ui/icons/Delete';
-import {listGames} from '../api/api-game.js'
+import {listGames, clearDurationForAllGames} from '../api/api-game.js'
 import Typography from '@material-ui/core/Typography'
 import {Redirect, Link} from 'react-router-dom'
 import auth from '../../auth/auth-helper'
@@ -260,6 +260,19 @@ export default function DashboardAdmin({ match }) {
       })
   }
 
+  const handlePurgeDurationClick = () => {
+    clearDurationForAllGames(
+      {userId: match.params.userId},
+      {t: jwt.token}).then((data) => {
+        if (data && data.error) {
+          console.log(data.error);
+        }
+        else {
+          populateGameData();
+        }
+      })
+  }
+
   function pad(n) {
     return (n < 10) ? ("0" + n) : n;
   }
@@ -282,7 +295,7 @@ export default function DashboardAdmin({ match }) {
                 </Box>
               </CardContent>
               <CardActions>
-                <Button startIcon={<DeleteIcon />} variant="contained" color="secondary" fullWidth>Purge Gameplay Seconds</Button>
+                <Button startIcon={<DeleteIcon />} variant="contained" color="secondary" onClick={() => {if(window.confirm('Are you sure to reset all durations?')){handlePurgeDurationClick()};}} fullWidth>Purge Gameplay Seconds</Button>
               </CardActions>
             </Card>
           </Grid>
