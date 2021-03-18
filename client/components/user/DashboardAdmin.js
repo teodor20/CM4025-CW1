@@ -10,6 +10,7 @@ import CardHeader from '@material-ui/core/CardHeader';
 import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
 import DeleteIcon from '@material-ui/icons/Delete';
+import {listGames} from '../api/api-game.js'
 import Divider from '@material-ui/core/Divider'
 import Paper from '@material-ui/core/Paper'
 import List from '@material-ui/core/List'
@@ -19,6 +20,7 @@ import Typography from '@material-ui/core/Typography'
 import {listadmin} from '../api/api-user.js'
 import {Redirect, Link} from 'react-router-dom'
 import auth from '../../auth/auth-helper'
+import Footer from '../../core/Footer';
 
 const useStyles = makeStyles(theme => ({
   root: theme.mixins.gutters({
@@ -45,7 +47,6 @@ export default function DashboardAdmin({ match }) {
     ],
 
     datasets: [{
-      data: [5, 10, 5],
       backgroundColor: [
         '#FFAEBC',
         '#A0E7E5',
@@ -56,7 +57,7 @@ export default function DashboardAdmin({ match }) {
     options: {
       title:{
         display:true,
-        text:'Total Gameplay Hours:',
+        text:'Total Gameplay Seconds:',
         fontSize:20
       }
     }
@@ -94,22 +95,20 @@ export default function DashboardAdmin({ match }) {
   })
 
   const [barData, setBarData] = useState({
+    labels: ["Game"],
     datasets: [
       {
         label:"Classic Snake",
-        data: [10, 0],
         backgroundColor: '#FFAEBC',
         barPercentage: 0.9
       },
       {
         label:"Tic-Tac-Toe",
-        data: [5, 0],
         backgroundColor: '#A0E7E5',
         barPercentage: 0.9
       },
       {
         label:"2048",
-        data: [8, 0],
         backgroundColor: '#B4F8C8',
         barPercentage: 0.9
       }
@@ -123,7 +122,7 @@ export default function DashboardAdmin({ match }) {
     }
   })
 
-  const [uniquePlayers, setuniquePlayers] = useState(0)
+  const [uniquePlayers, setUniquePlayers] = useState(0)
 
   const [redirectToSignin, setRedirectToSignin] = useState(false)
 
@@ -139,6 +138,7 @@ export default function DashboardAdmin({ match }) {
     }
     else {
       populateLastSevenDays();
+      populateGameData();
     }
   }, []);
   if (redirectToSignin) {
@@ -158,11 +158,66 @@ export default function DashboardAdmin({ match }) {
     }
     let reverseDates = dates.reverse()
     setLineData({labels: reverseDates});
-    console.log(reverseDates);
   }
 
-  const populateData = () => {
-    
+  const populateGameData = () => {
+    listGames(
+      {userId: match.params.userId},
+      {t: jwt.token}).then((data) => {
+        if (data && data.error) {
+          console.log(data.error);
+        }
+        else {
+          let snakeGames = 0;
+          let tttGames = 0;
+          let puzzleGames = 0;
+
+          let snakeHours = 0;
+          let tttHours = 0;
+          let puzzleHours = 0;
+
+          let gamesHours = [];
+          let uniqueUsersIds = [];
+          let uniqueUsers = 0;
+
+          data.forEach(game => {
+            if (game.type == "CS") {
+              snakeGames++;
+              snakeHours += game.duration;
+            }
+            else if (game.type == "TTT") {
+              tttGames++;
+              tttHours += game.duration;
+            }
+            else {
+              puzzleGames++;
+              puzzleHours += game.duration;
+            }
+
+            if (!uniqueUsersIds.includes(game.user))
+            {
+              uniqueUsersIds.push(game.user);
+            }
+          })
+
+          gamesHours = [snakeHours, tttHours, puzzleHours]
+          uniqueUsers = uniqueUsersIds.length;
+
+          //Set unique players
+          setUniquePlayers(uniqueUsers);
+
+          setBarData({ datasets: [ {...barData.datasets[0], data: [snakeGames, 0] },
+                                   {...barData.datasets[1], data: [tttGames, 0] },
+                                   {...barData.datasets[2], data: [puzzleGames, 0] }] });
+
+
+          //Set pie chart data
+          setPieData({datasets: [{
+              data: gamesHours
+            }]
+          })
+        }
+      })
   }
 
   function pad(n) {
@@ -170,7 +225,7 @@ export default function DashboardAdmin({ match }) {
   }
 
     return (
-      <div>
+      <section>
         <Typography variant="h1" className={classes.title}></Typography>
         <Grid container spacing={2}>
           <Grid className={classes.grid} item xs={12} md={4}>
@@ -187,7 +242,7 @@ export default function DashboardAdmin({ match }) {
                 </Box>
               </CardContent>
               <CardActions>
-                <Button startIcon={<DeleteIcon />} variant="contained" color="secondary" fullWidth>Purge Gameplay Hours</Button>
+                <Button startIcon={<DeleteIcon />} variant="contained" color="secondary" fullWidth>Purge Gameplay Seconds</Button>
               </CardActions>
             </Card>
           </Grid>
@@ -201,6 +256,7 @@ export default function DashboardAdmin({ match }) {
             <Line data={lineData} options={lineData.options}></Line>
           </Container>
         </Grid>
-      </div>
+        <Footer/>
+      </section>
     )
 }
