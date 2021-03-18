@@ -39,7 +39,14 @@ export default function Profile({ match }) {
   const jwt = auth.isAuthenticated()
   const [data, setData] = useState({
 
-    // These labels appear in the legend and in the tooltips when hovering different arcs
+    datasets: [{
+      backgroundColor: [
+        '#FFAEBC',
+        '#A0E7E5',
+        '#B4F8C8'
+      ]
+    }],
+
     labels: [
         'Classic Snake',
         'Tic-Tac-Toe',
@@ -54,6 +61,7 @@ export default function Profile({ match }) {
       {userId: match.params.userId},
       {t: jwt.token}).then((data) => {
         if (data && data.error) {
+          console.log(data.error);
         } else {
           //Count the different types of games
           let snakeGames = 0;
@@ -69,12 +77,7 @@ export default function Profile({ match }) {
           let dataArray = [snakeGames, tttGames, puzzleGames]
 
           setData({datasets: [{
-              data: dataArray,
-              backgroundColor: [
-                '#FFAEBC',
-                '#A0E7E5',
-                '#B4F8C8'
-              ]
+              data: dataArray
             }]
           })
 
