@@ -34,7 +34,7 @@ export default function Footer() {
   const classes = useStyles();
 
   const content = {
-    'copy': '© 2021 Game Mania. All rights reserved..'
+    'copy': '© 2021 Game Mania. All rights reserved.'
   };
 
   return (

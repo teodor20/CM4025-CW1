@@ -73,7 +73,7 @@ const remove = async (req, res) => {
 //Clear duration for all games
 const clearDuration = async (req, res) => {
     try {
-        let updated = await Game.updateMany({}, {$set: {duration: 1}})
+        let updated = await Game.updateMany({}, {$set: {duration: 0}})
         res.json(updated)
     } catch (err) {
         return res.status(400).json({
