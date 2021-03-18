@@ -33,6 +33,7 @@
     "chart.js": "^2.9.4",
     "compression": "^1.7.4",
     "cookie-parser": "^1.4.5",
+    "copy-webpack-plugin": "^8.0.0",
     "cors": "^2.8.5",
     "crypto": "^1.0.1",
     "dotenv": "^8.2.0",

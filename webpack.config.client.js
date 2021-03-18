@@ -1,5 +1,6 @@
 const path = require('path')
 const webpack = require('webpack')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
 const CURRENT_WORKING_DIR = process.cwd()
 
 const config = {
@@ -25,14 +26,19 @@ const config = {
                 ]
             },
             {
-                test: /\.(ttf|eot|svg|gif|jpg|png)(\?[\s\S]+)?$/,
+                test: /\.(ttf|eot|svg|gif|jpg|png|ico)(\?[\s\S]+)?$/,
                 use: 'file-loader'
             }
         ]
     },  
     plugins: [
-          new webpack.HotModuleReplacementPlugin(),
-          new webpack.NoEmitOnErrorsPlugin()
+        new webpack.HotModuleReplacementPlugin(),
+        new webpack.NoEmitOnErrorsPlugin(),
+        new CopyWebpackPlugin({ 
+            patterns: [ 
+             { from: './client/assets/images/favicon.ico' }
+            ]
+         })
     ],
     resolve: {
         alias: {
