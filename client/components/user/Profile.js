@@ -18,6 +18,7 @@ import auth from '../../auth/auth-helper'
 import {read} from '../api/api-user.js'
 import {getUserGames} from '../api/api-game.js'
 import {Redirect, Link} from 'react-router-dom'
+import Footer from '../../core/Footer';
 
 const useStyles = makeStyles(theme => ({
   root: theme.mixins.gutters({
@@ -52,8 +53,6 @@ export default function Profile({ match }) {
         'Tic-Tac-Toe',
         '2048'
     ]
-
-    
   })
 
   const populateUserGames = () => {
@@ -111,37 +110,40 @@ export default function Profile({ match }) {
   }
 
   return (
-    <Paper className={classes.root} elevation={4}>
-      <Typography variant="h6" className={classes.title}>
-        Profile
-      </Typography>
-      <List dense>
-        <ListItem>
-          <ListItemAvatar>
-            <Avatar>
-              <Person/>
-            </Avatar>
-          </ListItemAvatar>
-          <ListItemText primary={user.name} secondary={user.email}/> {
-           auth.isAuthenticated().user && auth.isAuthenticated().user._id == user._id &&
-            (<ListItemSecondaryAction>
-              <Link to={"/user/edit/" + user._id}>
-                <IconButton aria-label="Edit" color="primary">
-                  <Edit/>
-                </IconButton>
-              </Link>
-              <DeleteUser userId={user._id}/>
-            </ListItemSecondaryAction>)
-          }
-        </ListItem>
-        <Divider/>
-        <ListItem>
-          <ListItemText primary={"Joined: " + (
-            new Date(user.created)).toDateString()}/>
-        </ListItem>
-      </List>
-      <Typography variant="h6" className={classes.title}>Games played:</Typography>
-      <Pie data={data} id="test" options="area" />
-    </Paper>
+    <section>
+      <Paper className={classes.root} elevation={4}>
+        <Typography variant="h6" className={classes.title}>
+          Profile
+        </Typography>
+        <List dense>
+          <ListItem>
+            <ListItemAvatar>
+              <Avatar>
+                <Person/>
+              </Avatar>
+            </ListItemAvatar>
+            <ListItemText primary={user.name} secondary={user.email}/> {
+              auth.isAuthenticated().user && auth.isAuthenticated().user._id == user._id &&
+              (<ListItemSecondaryAction>
+                <Link to={"/user/edit/" + user._id}>
+                  <IconButton aria-label="Edit" color="primary">
+                    <Edit/>
+                  </IconButton>
+                </Link>
+                <DeleteUser userId={user._id}/>
+              </ListItemSecondaryAction>)
+            }
+          </ListItem>
+          <Divider/>
+          <ListItem>
+            <ListItemText primary={"Joined: " + (
+              new Date(user.created)).toDateString()}/>
+          </ListItem>
+        </List>
+        <Typography variant="h6" className={classes.title}>Games played:</Typography>
+        <Pie data={data} id="test" options="area" />
+      </Paper>
+      <Footer />
+    </section>
   )
 }

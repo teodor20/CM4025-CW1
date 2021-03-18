@@ -7,6 +7,7 @@ import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardMedia from '@material-ui/core/CardMedia';
+import Footer from '../core/Footer';
 
 
 import gamerImg from '../assets/images/gamerstock.png'
@@ -103,6 +104,7 @@ export default function About() {
                 </Grid>
                 </Box>
             </Container>
+            <Footer />
         </section>
     )
 }

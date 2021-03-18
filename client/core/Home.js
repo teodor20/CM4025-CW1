@@ -2,7 +2,7 @@ import React from 'react'
 
 import Header from '../components/landing/Header';
 import Games from '../components/landing/Games';
-import Footer from '../components/landing/Footer';
+import Footer from './Footer';
 
 export default function Home() {
     return (
