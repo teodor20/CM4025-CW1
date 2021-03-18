@@ -44,9 +44,9 @@ const getUserGames = async (params, credentials) => {
 
 // ------Admin users------
 
-const listGame = async (params, credentials, signal) => {
+const listGames = async (params, credentials, signal) => {
     try {
-      let response = await fetch('/api/games/admin' + params.userId, {
+      let response = await fetch('/api/games/admin/' + params.userId, {
         method: 'GET',
         signal: signal,
         headers: {
@@ -63,7 +63,7 @@ const listGame = async (params, credentials, signal) => {
 
 const removeGame = async (params, credentials, gameId) => {
   try {
-    let response = await fetch('/api/games/admin' + params.userId, {
+    let response = await fetch('/api/games/admin/' + params.userId, {
       method: 'DELETE',
       headers: {
         'Accept': 'application/json',
@@ -102,7 +102,7 @@ const clearDurationForAllGames = async (params, credentials) => {
 
 export {
     createGame,
-    listGame,
+    listGames,
     removeGame,
     getUserGames,
     clearDurationForAllGames
