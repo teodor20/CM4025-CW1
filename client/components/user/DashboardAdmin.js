@@ -81,6 +81,14 @@ export default function DashboardAdmin({ match }) {
         display:true,
         text:'Daily Games:',
         fontSize:20
+      },
+      scales: {
+        yAxes: [{
+          ticks: {
+            stepSize: 1,
+            beginAtZero: true,
+          },
+        }],
       }
     }
   })
