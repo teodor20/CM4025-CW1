@@ -11,13 +11,7 @@ import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
 import DeleteIcon from '@material-ui/icons/Delete';
 import {listGames} from '../api/api-game.js'
-import Divider from '@material-ui/core/Divider'
-import Paper from '@material-ui/core/Paper'
-import List from '@material-ui/core/List'
-import ListItem from '@material-ui/core/ListItem'
-import ListItemText from '@material-ui/core/ListItemText'
 import Typography from '@material-ui/core/Typography'
-import {listadmin} from '../api/api-user.js'
 import {Redirect, Link} from 'react-router-dom'
 import auth from '../../auth/auth-helper'
 import Footer from '../../core/Footer';
@@ -67,21 +61,18 @@ export default function DashboardAdmin({ match }) {
     datasets: [
       {
         label:"Classic Snake",
-        data: [5, 4, 1, 0, 0, 5, 2],
         borderColor: '#FFAEBC',
         fill: false
       },
       {
         label:"Tic-Tac-Toe",
-        data: [10, 8, 6, 3, 4, 8, 11],
         borderColor: '#A0E7E5',
         fill: false
       },
       {
         label:"2048",
-        data: [3, 2, 1, 7, 2, 0, 5],
         borderColor: '#B4F8C8',
-        fill: false
+        fill: false,
       }
     ],
 
@@ -178,20 +169,51 @@ export default function DashboardAdmin({ match }) {
 
           let gamesHours = [];
           let uniqueUsersIds = [];
+          let countGamesLastSevenDaysSnake = new Array(7).fill(0)
+          let countGamesLastSevenDaysTtt = new Array(7).fill(0)
+          let countGamesLastSevenDaysPuzzle = new Array(7).fill(0)
           let uniqueUsers = 0;
 
+          // Filter data for all dashboards
+          // For each game we find the type, add it to the total number for that type,
+          // add the duration to the total number for that type
+          // Check if it has been played in the last 7 days and add it to the array for that type
           data.forEach(game => {
+            let todayDate = new Date();
+            let gameDate = new Date(game.created);
+
             if (game.type == "CS") {
               snakeGames++;
               snakeHours += game.duration;
+
+              // This loop will check if each game has been played in the last 7 days
+              // and if yes - apend one of the 7 elements of the array above
+              for (let i = 0; i < 7; i++){
+                if (gameDate.getDate() == todayDate.getDate() - i) {
+                  countGamesLastSevenDaysSnake[i] = countGamesLastSevenDaysSnake[i] + 1;
+                }
+              }
+
             }
             else if (game.type == "TTT") {
               tttGames++;
               tttHours += game.duration;
+
+              for (let i = 0; i < 7; i++){
+                if (gameDate.getDate() == todayDate.getDate() - i) {
+                  countGamesLastSevenDaysTtt[i] = countGamesLastSevenDaysTtt[i] + 1;
+                }
+              }
             }
             else {
               puzzleGames++;
               puzzleHours += game.duration;
+
+              for (let i = 0; i < 7; i++){
+                if (gameDate.getDate() == todayDate.getDate() - i) {
+                  countGamesLastSevenDaysPuzzle[i] = countGamesLastSevenDaysPuzzle[i] + 1;
+                }
+              }
             }
 
             if (!uniqueUsersIds.includes(game.user))
@@ -208,7 +230,8 @@ export default function DashboardAdmin({ match }) {
 
           setBarData({ datasets: [ {...barData.datasets[0], data: [snakeGames, 0] },
                                    {...barData.datasets[1], data: [tttGames, 0] },
-                                   {...barData.datasets[2], data: [puzzleGames, 0] }] });
+                                   {...barData.datasets[2], data: [puzzleGames, 0] } ]
+          });
 
 
           //Set pie chart data
@@ -216,6 +239,15 @@ export default function DashboardAdmin({ match }) {
               data: gamesHours
             }]
           })
+          
+          //Set line chart data
+          let reverseCountGamesLastSevenDaysSnake = countGamesLastSevenDaysSnake.reverse();
+          let reverseCountGamesLastSevenDaysTtt = countGamesLastSevenDaysTtt.reverse();
+          let reverseCountGamesLastSevenDaysPuzzle = countGamesLastSevenDaysPuzzle.reverse();
+          setLineData({ datasets: [ {...barData.datasets[0], data: reverseCountGamesLastSevenDaysSnake },
+                                    {...barData.datasets[1], data: reverseCountGamesLastSevenDaysTtt },
+                                    {...barData.datasets[2], data: reverseCountGamesLastSevenDaysPuzzle } ]
+          });
         }
       })
   }
