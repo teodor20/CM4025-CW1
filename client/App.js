@@ -4,6 +4,7 @@ import MainRouter from './MainRouter'
 import {BrowserRouter} from 'react-router-dom'
 import { ThemeProvider } from '@material-ui/styles'
 import theme from './theme'
+import CssBaseline from "@material-ui/core/CssBaseline";
 const App = () => {
     
 React.useEffect(() => {
@@ -16,6 +17,7 @@ React.useEffect(() => {
  return (
  <BrowserRouter>
  <ThemeProvider theme={theme}>
+ <CssBaseline />
  <MainRouter/>
  </ThemeProvider>
  </BrowserRouter>
