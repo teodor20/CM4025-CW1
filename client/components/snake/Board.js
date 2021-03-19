@@ -15,7 +15,8 @@ const getRandomCoordinates = () => {
 
 const boardStyle = {
     position: 'relative',
-    margin: '50px auto',
+    margin: '0px auto',
+    right: '30%',
     width: '600px',
     height: '600px',
     border: '2px solid #000'
@@ -236,7 +237,39 @@ const funcBoard = () => {
         return <Redirect to='/signin'/>
     }
   
-    return <Board/>
+    return  (
+        <section>
+            <div>
+                <div
+                    style={{
+                      fontFamily: "sans-serif",
+                      flex: 1,
+                      fontWeight: "700",
+                      fontSize: 60,
+                      color: "#776e65",
+                      textAlign: "center"
+                    }}
+                > Classic Snake
+                </div>
+            </div>
+            <div
+              style={{
+                  width: 345,
+                  margin: "auto",
+                  marginTop: 30
+                }}
+                >
+                <Board/>
+                <div style={{ width: "inherit" }}>
+                    <p>
+                      <strong className="important">How to play:</strong> Use your{" "}
+                      <strong>arrow keys</strong> to move the snake. When you hit a wall
+                      or part of the snake <strong>you lose!</strong>
+                    </p>
+                </div>
+            </div>
+        </section>
+    )
   }
 
 export default funcBoard

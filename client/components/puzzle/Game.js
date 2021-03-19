@@ -431,6 +431,7 @@ export default function Game() {
               style={{
                 flex: 1,
                 marginTop: "auto",
+                marginLeft: "260px"
               }}
             >
               <div onClick={resetGame} style={style.newGameButton}>
