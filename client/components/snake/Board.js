@@ -164,7 +164,6 @@ class Board extends Component {
         }
     }
 
-    //TODO: End the game with something other than alert
     gameOver() {
         alert(`Game Over. Snake length is ${this.state.snakeDots.length}`);
         this.setState(initialState);

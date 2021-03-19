@@ -16,17 +16,13 @@ import { StaticRouter } from 'react-router-dom'
 import { ServerStyleSheets, ThemeProvider } from '@material-ui/styles'
 import theme from './../client/theme'
 
-
-//TODO: Delete later
 import Template from './../template'
 
-//TODO: comment out before building for production
 import devBundle from './devBundle'
 
 const CURRENT_WORKING_DIR = process.cwd()
 const app = express()
 
-//TODO: comment out before building for production
 devBundle.compile(app)
 
 app.use('/dist', express.static(path.join(CURRENT_WORKING_DIR, 'dist')))

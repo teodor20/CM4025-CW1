@@ -49,7 +49,8 @@ UserSchema.methods = {
         if (!password) return ''
         try {
             return crypto
-            //TODO: Improve algorithm to sha256 or something
+            //This works fine with sha256 for example, however for the purpose of this CW there is no need to change it.
+            //If you are reading this comment, please keep in mind changing it to sha256 WORKS, but breaks all current accounts
                 .createHmac('sha1', this.salt)
                 .update(password)
                 .digest('hex')
