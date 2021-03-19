@@ -42,9 +42,9 @@ export default function Profile({ match }) {
 
     datasets: [{
       backgroundColor: [
-        '#FFAEBC',
-        '#A0E7E5',
-        '#B4F8C8'
+        '#ff8ca0',
+        '#74e3e0',
+        '#84faa7'
       ]
     }],
 

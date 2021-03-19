@@ -19,7 +19,8 @@ const boardStyle = {
     right: '30%',
     width: '600px',
     height: '600px',
-    border: '2px solid #000'
+    border: '2px solid #000',
+    backgroundColor: 'white'
 }
 
 const initialState = {

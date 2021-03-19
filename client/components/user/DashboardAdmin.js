@@ -42,16 +42,16 @@ export default function DashboardAdmin({ match }) {
 
     datasets: [{
       backgroundColor: [
-        '#FFAEBC',
-        '#A0E7E5',
-        '#B4F8C8'
+        '#ffa1b1',
+        '#91e3e1',
+        '#9df5b7'
       ]
     }],
 
     options: {
       title:{
         display:true,
-        text:'Total Gameplay Seconds:',
+        text:'Total Gameplay Time (seconds):',
         fontSize:20
       }
     }
@@ -61,17 +61,17 @@ export default function DashboardAdmin({ match }) {
     datasets: [
       {
         label:"Classic Snake",
-        borderColor: '#FFAEBC',
+        borderColor: '#ffa1b1',
         fill: false
       },
       {
         label:"Tic-Tac-Toe",
-        borderColor: '#A0E7E5',
+        borderColor: '#91e3e1',
         fill: false
       },
       {
         label:"2048",
-        borderColor: '#B4F8C8',
+        borderColor: '#9df5b7',
         fill: false,
       }
     ],
@@ -98,17 +98,17 @@ export default function DashboardAdmin({ match }) {
     datasets: [
       {
         label:"Classic Snake",
-        backgroundColor: '#FFAEBC',
+        backgroundColor: '#ffa1b1',
         barPercentage: 0.9
       },
       {
         label:"Tic-Tac-Toe",
-        backgroundColor: '#A0E7E5',
+        backgroundColor: '#91e3e1',
         barPercentage: 0.9
       },
       {
         label:"2048",
-        backgroundColor: '#B4F8C8',
+        backgroundColor: '#9df5b7',
         barPercentage: 0.9
       }
     ],

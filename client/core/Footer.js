@@ -14,7 +14,9 @@ const useStyles = makeStyles((theme) => ({
   root: {
     [theme.breakpoints.down('md')]: {
       textAlign: 'center',
-    }
+    },
+    backgroundColor: '#3f4771',
+    marginTop: '50px'
   },
   iconsBoxRoot: {
     [theme.breakpoints.down('md')]: {

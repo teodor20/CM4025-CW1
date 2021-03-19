@@ -20,7 +20,10 @@ const theme = createMuiTheme({
         },
         openTitle: '#3f4771',
         protectedTitle: pink['400'],
-        type: 'light'
+        type: 'light',
+        background: {
+            default: '#f2f4far'
+        }
     }
 })
 export default theme
