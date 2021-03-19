@@ -295,7 +295,7 @@ export default function DashboardAdmin({ match }) {
                 </Box>
               </CardContent>
               <CardActions>
-                <Button startIcon={<DeleteIcon />} variant="contained" color="secondary" onClick={() => {if(window.confirm('Are you sure to reset all durations?')){handlePurgeDurationClick()};}} fullWidth>Purge Gameplay Seconds</Button>
+                <Button startIcon={<DeleteIcon />} variant="contained" color="secondary" onClick={() => {if(window.confirm('Are you sure to reset all durations?')){handlePurgeDurationClick()};}} fullWidth>Purge Gameplay Time</Button>
               </CardActions>
             </Card>
           </Grid>
