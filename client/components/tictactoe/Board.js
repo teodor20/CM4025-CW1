@@ -2,7 +2,7 @@ import React from 'react'
 import Square from './Square'
 
 const style = {
-    margin: '50px auto',
+    margin: '10px auto',
     border: '1rem solid #ff652f',
     background: '#ff652f',
     width: '600px',
@@ -13,12 +13,12 @@ const style = {
     flexWrap: 'wrap'
 }
 
-const Board = ({ squares, onClick }) => (
-    <div style = {style}>
-        {squares.map((square, i) => (
-            <Square key={i} value={square} onClick={() => onClick(i)} />
-        ))}
-    </div>
-)
-
-export default Board;
+export default function Board({ squares, onClick }) {
+    return (
+        <div style={style}>
+            {squares.map((square, i) => (
+                <Square key={i} value={square} onClick={() => onClick(i)} />
+            ))}
+        </div>
+    )
+}

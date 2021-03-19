@@ -3,17 +3,21 @@ import Board from './Board'
 import {Redirect, Link} from 'react-router-dom'
 import auth from '../../auth/auth-helper'
 import {createGame} from '../api/api-game'
+import Button from '@material-ui/core/Button';
 
-const style = {
+const styles = {
     fontFamily: '"Roboto", sans-serif',
     justifyContent: 'center',
     display: 'flex',
     minHeight: '100vh',
     infoWrapper: {
         display: 'flex',
-        justifyContent: 'space-between'
+        justifyContent: 'centred',
+        textAlign: 'center',
+        marginLeft: '450px',
+        fontSize: "20px"
     }
-}
+};
 
 const calculateWinner = (squares) => {
 
@@ -40,7 +44,6 @@ const calculateWinner = (squares) => {
 }
 
 export default function Game() {
-
     const [redirectToSignin, setRedirectToSignin] = useState(false)
     const jwt = auth.isAuthenticated();
     const timer = useRef(0);
@@ -51,6 +54,13 @@ export default function Game() {
     const [xIsNext, setXisnext] = useState(true);
     const winner = calculateWinner(history[stepNumber]);
     const xO = xIsNext ? "X" : "O";
+
+    const clearGame = () => {
+        recordGame();
+        setHistory([Array(9).fill(null)])
+        setStepNumber(0);
+        setXisnext(true);
+    }
 
     useEffect(() => {
         const abortController = new AbortController();
@@ -116,33 +126,33 @@ export default function Game() {
         setXisnext(!xIsNext);
     }
 
-    const jumpTo = (step) => {
-        setStepNumber(step);
-        setXisnext(step % 2 === 0);
-    }
-
-    const renderMoves = () => {
-        history.map((_step, move) => {
-            const destination = move ? `Go to move #${move}` : "Go to Start";
-            return (
-                <li key={move}>
-                    <button onClick={() => jumpTo(move)}>{destination}</button>
-                </li>
-            );
-        });
-    }
-
     return (
-        <div style={style}>
-            <h1 style={style}>Tic Tac Toe</h1>
-            <Board squares={history[stepNumber]} onClick={handleClick} />
-            <div className={style.infoWrapper}>
-                <div>
-                    <h3>History</h3>
-                    {renderMoves()}
-                </div>
-                <h3>{winner ? "Winner: " + winner : "Next Player: " + xO}</h3>
+        <section>
+            <div
+                style={{
+                  fontFamily: "sans-serif",
+                  flex: 1,
+                  fontWeight: "700",
+                  fontSize: 60,
+                  color: "#776e65",
+                  textAlign: "center"
+                }}
+            > Tic-Tac-Toe
             </div>
-        </div>
+            <div
+              style={{
+                  width: 600,
+                  margin: "auto",
+                  marginTop: 30
+                }}
+            >
+                <Board squares={history[stepNumber]} onClick={handleClick} />
+                <Button color="primary" variant="contained" style={{float: 'left'}} onClick={clearGame}>New Game</Button>
+                <div style={styles.infoWrapper}>
+                    <h3>{winner ? "Winner: " + winner : "Next Player: " + xO}</h3>
+                </div>
+            </div>
+        </section>
+       
     )
 }

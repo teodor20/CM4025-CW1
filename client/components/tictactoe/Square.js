@@ -1,18 +1,15 @@
 import React from 'react';
 
-const style = {
+const styles = {
     background: 'gray',
     cursor: 'pointer',
     fontSize: "35px"
 }
 
-const Square = ({value, onClick}) => {
-
+export default function Square({value, onClick}) {
     return (
-        <button style={style} onClick={onClick}>
+        <button style={styles} onClick={onClick}>
             <h1>{value}</h1>
         </button>
     )
 }
-
-export default Square;

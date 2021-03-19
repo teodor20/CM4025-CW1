@@ -239,18 +239,16 @@ const funcBoard = () => {
   
     return  (
         <section>
-            <div>
-                <div
-                    style={{
-                      fontFamily: "sans-serif",
-                      flex: 1,
-                      fontWeight: "700",
-                      fontSize: 60,
-                      color: "#776e65",
-                      textAlign: "center"
-                    }}
-                > Classic Snake
-                </div>
+            <div
+                style={{
+                  fontFamily: "sans-serif",
+                  flex: 1,
+                  fontWeight: "700",
+                  fontSize: 60,
+                  color: "#776e65",
+                  textAlign: "center"
+                }}
+            > Classic Snake
             </div>
             <div
               style={{
